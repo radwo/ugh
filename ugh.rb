@@ -84,7 +84,7 @@ class UghGame
   end
 
   def fall
-    move_down if @tick % 30 == 0 && objects.first.y < @height-1
+    move_down if @tick % 40 == 0 && objects.first.y < @height-1
   end
 
   def create_new_passanger
