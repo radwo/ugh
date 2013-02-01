@@ -13,7 +13,7 @@ class UghGame
     @taxi   = Taxi.new(15, 15)
     @passengers = []
     create_new_passanger
-    @destinations = [EndPoint.new(10,15), EndPoint.new(20,30), EndPoint.new(20,1)]
+    @destinations = [EndPoint.new(10,15), EndPoint.new(2,9), EndPoint.new(20,3)]
   end
 
   def exit_message
@@ -54,19 +54,19 @@ class UghGame
   end
 
   def move_left
-    objects.first.x -= 1
+    objects.first.x -= 1 if objects.first.x > 0
   end
 
   def move_right
-    objects.first.x += 1
+    objects.first.x += 1 if objects.first.x < @width-1
   end
 
   def move_down
-    objects.first.y += 1 if objects.first.y < @height
+    objects.first.y += 1 if objects.first.y < @height-1
   end
 
   def move_up
-    objects.first.y -= 1
+    objects.first.y -= 1 if objects.first.y > 0
   end
 
   def any_delivered?
@@ -84,7 +84,7 @@ class UghGame
   end
 
   def fall
-    move_down if @tick % 30 == 0
+    move_down if @tick % 40 == 0 && objects.first.y < @height-1
   end
 
   def create_new_passanger
@@ -161,4 +161,4 @@ class UghGame
 
 end
 
-Gaminator::Runner.new(UghGame, :rows => 40, :cols => 100).run
+Gaminator::Runner.new(UghGame, :rows => 30, :cols => 50).run
